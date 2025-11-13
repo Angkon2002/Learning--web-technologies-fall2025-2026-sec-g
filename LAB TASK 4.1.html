@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>JS Example - Email Validation</title>
+</head>
+<body>
+    <h1>Js Example</h1>
+
+    <form onsubmit="return test()">
+        Email: 
+        <input type="text" id="email" name="email" value="" onblur="testEmail()" />
+        <button type="button" id="infoBtn" onclick="toggleHint()" style="width:22px; height:22px; margin-left:6px;">i</button>
+        <p id="eError"></p>
+
+        <div id="hintBox" style="display:none; border:1px solid #000; padding:6px; width:210px; margin-top:6px;">
+            hint: sample@example.com
+        </div>
+
+        <br><br>
+        <input type="submit" value="Submit" />
+    </form>
+    <h4>Validation Rules:</h4>
+    <ol type="i">
+        <li>Cannot be empty</li>
+        <li>Must be a valid email address (i.e anything@example.com)</li>
+    </ol>
+    <script>
+        let eError = document.getElementById('eError');
+        let hintBox = document.getElementById('hintBox');
+        let email = document.getElementById('email');
+        let infoBtn = document.getElementById('infoBtn');
+
+        function toggleHint(){
+            if(hintBox.style.display === "none"){
+                hintBox.style.display = "block";
+            } else {
+                hintBox.style.display = "none";
+            }
+        }
+
+        function testEmail(){
+            let val = email.value.trim();
+
+            if(val === ""){
+                eError.innerHTML = "Please type email first!";
+                eError.style.color = "red";
+                return;
+            }
+
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if(!emailPattern.test(val)){
+                eError.innerHTML = "Please enter a valid email address!";
+                eError.style.color = "red";
+                return;
+            }
+
+            eError.innerHTML = "";
+        }
+        function test(){
+            testEmail();
+
+            if(eError.innerHTML !== ""){
+                return false;
+            }
+
+            let val = email.value.trim();
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if(val !== "" && emailPattern.test(val)){
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
