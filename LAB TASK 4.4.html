@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Date of Birth Validation</title>
+</head>
+<body>
+<h3>4.</h3>
+<form onsubmit="return test()">
+
+    <fieldset style="width:260px; padding:10px;">
+        <legend>Date of Birth</legend>
+    dd&nbsp;&nbsp;&nbsp;&nbsp; mm&nbsp;&nbsp;&nbsp;&nbsp; yyyy <br><br>
+
+        <input type="text" id="dd" onblur="testDOB()" style="width:40px;"> /
+        <input type="text" id="mm" onblur="testDOB()" style="width:40px;"> /
+        <input type="text" id="yy" onblur="testDOB()" style="width:60px;">
+
+        <hr style="margin-top:15px;">
+
+        <input type="submit" value="Submit">
+    </fieldset>
+
+    <p id="dobError"></p>
+</form>
+<h4>Validation Rules:</h4>
+<ol type="i">
+    <li>Cannot be empty</li>
+    <li>Must be a valid number (dd: 0–31, mm: 1–12, yyyy: 1900–2016)</li>
+</ol>
+<script>
+    let dd = document.getElementById('dd');
+    let mm = document.getElementById('mm');
+    let yy = document.getElementById('yy');
+    let dobError = document.getElementById('dobError');
+
+    function testDOB(){
+        let d = dd.value.trim();
+        let m = mm.value.trim();
+        let y = yy.value.trim();
+
+        if(d === "" || m === "" || y === ""){
+            dobError.innerHTML = "All fields must be filled!";
+            dobError.style.color = "red";
+            return;
+        }
+
+        let day = parseInt(d);
+        let month = parseInt(m);
+        let year = parseInt(y);
+
+        if(day < 0 || day > 31){
+            dobError.innerHTML = "Day must be 0–31!";
+            dobError.style.color = "red";
+            return;
+        }
+
+        if(month < 1 || month > 12){
+            dobError.innerHTML = "Month must be 1–12!";
+            dobError.style.color = "red";
+            return;
+        }
+
+        if(year < 1900 || year > 2016){
+            dobError.innerHTML = "Year must be 1900–2016!";
+            dobError.style.color = "red";
+            return;
+        }
+
+        dobError.innerHTML = "";
+    }
+
+    function test(){
+        testDOB();
+
+        if(dobError.innerHTML !== ""){
+            return false;
+        }
+
+        let d = dd.value.trim();
+        let m = mm.value.trim();
+        let y = yy.value.trim();
+
+        if(d !== "" && m !== "" && y !== ""){
+            let day = parseInt(d);
+            let month = parseInt(m);
+            let year = parseInt(y);
+
+            if(day >= 0 && day <= 31 && month >= 1 && month <= 12 && year >= 1900 && year <= 2016){
+                return true;
+            }
+        }
+
+        return false;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gender Validation</title>
+</head>
+<body>
+
+<h3>3.</h3>
+<form onsubmit="return test()">
+
+    <fieldset style="width:250px;">
+        <legend>Gender</legend>
+
+        <input type="radio" name="gender" id="male" value="Male" onclick="testGender()"> Male
+        <input type="radio" name="gender" id="female" value="Female" onclick="testGender()"> Female
+        <input type="radio" name="gender" id="other" value="Other" onclick="testGender()"> Other
+    </fieldset>
+    <p id="gError"></p>
+
+    <br>
+    <input type="submit" value="Submit">
+
+</form>
+<h4>Validation Rules:</h4>
+<ol type="i">
+    <li>At least one of them has to be selected</li>
+</ol>
+<script>
+    let gError = document.getElementById('gError');
+    let male = document.getElementById('male');
+    let female = document.getElementById('female');
+    let other = document.getElementById('other');
+
+    function testGender(){
+        if(!male.checked && !female.checked && !other.checked){
+            gError.innerHTML = "Please select a gender!";
+            gError.style.color = "red";
+        } else {
+            gError.innerHTML = "";
+        }
+    }
+
+    function test(){
+        testGender();
+
+        if(gError.innerHTML !== ""){
+            return false;
+        }
+
+        if(male.checked || female.checked || other.checked){
+            return true;
+        }
+
+        return false;
+    }
+</script>
+</body>
+</html>

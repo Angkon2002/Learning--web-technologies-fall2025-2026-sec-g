@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Degree Validatin</title>
+</head>
+<body>
+
+<h3>5.</h3>
+<form onsubmit="return test()">
+
+    <fieldset style="width:260px; padding:10px;">
+        <legend>Degree</legend>
+        <input type="checkbox" id="ssc" name="degree" value="SSC" onclick="testDegree()"> SSC
+    <input type="checkbox" id="hsc" name="degree" value="HSC" onclick="testDegree()"> HSC
+        
+    <input type="checkbox" id="bsc" name="degree" value="BSc" onclick="testDegree()"> BSc
+    </fieldset>
+
+    <p id="degError"></p>
+
+    <br>
+    <input type="submit" value="Submit">
+
+</form>
+<h4>Validation Rules:</h4>
+<ol type="i">
+    <li>At least one of them has to be selected</li>
+</ol>
+<script>
+    let degError = document.getElementById('degError');
+    let ssc = document.getElementById('ssc');
+    let hsc = document.getElementById('hsc');
+    let bsc = document.getElementById('bsc');
+
+    function testDegree(){
+        if(!ssc.checked && !hsc.checked && !bsc.checked){
+            degError.innerHTML = "Please select at least one degree!";
+            degError.style.color = "red";
+        } else {
+            degError.innerHTML = "";
+        }
+    }
+    function test(){
+        testDegree();
+        if(degError.innerHTML !== ""){
+            return false;
+        }
+
+        if(ssc.checked || hsc.checked || bsc.checked){
+            return true;
+        }
+        return false;
+    }
+</script>
+</body>
+</html>
