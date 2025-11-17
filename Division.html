@@ -1,0 +1,104 @@
+<html>
+<head>
+    <title>Division Calculator</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        #display {
+            width: 200px;
+            height: 40px;
+            font-size: 22px;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        button {
+            width: 45px;
+            height: 40px;
+            font-size: 18px;
+            margin: 3px;
+        }
+
+        #acBtn {
+            background-color: red;
+            color: white;
+        }
+        #cBtn {
+            background-color: yellow;
+        }
+
+    </style>
+</head>
+<body>
+
+    <input id="display" type="text" value="0" disabled><br>
+
+    <button onclick="pressNum('1')">1</button>
+    <button onclick="pressNum('2')">2</button>
+    <button onclick="pressNum('3')">3</button>
+    <button onclick="divide()">/</button><br>
+
+    <button onclick="pressNum('4')">4</button>
+    <button onclick="pressNum('5')">5</button>
+    <button onclick="pressNum('6')">6</button>
+    <button onclick="calculate()">=</button><br>
+
+    <button onclick="pressNum('7')">7</button>
+    <button onclick="pressNum('8')">8</button>
+    <button onclick="pressNum('9')">9</button>
+    <button id="cBtn" onclick="clearEntry()">C</button><br>
+
+    <button onclick="pressNum('0')" style="width: 98px;">0</button>
+    <button id="acBtn" onclick="allClear()">AC</button>
+
+<script>
+    let current = "0";    
+    let stored = null;    
+    let dividing = false;  
+
+    function update() {
+        document.getElementById("display").value = current;
+    }
+
+    function pressNum(n) {
+        if (current === "0") current = n;
+        else current += n;
+        update();
+    }
+
+    function divide() {
+        stored = parseFloat(current); 
+        current = "0";
+        dividing = true;
+        update();
+    }
+
+    function calculate() {
+        if (dividing && stored !== null) {
+            let second = parseFloat(current);
+
+            if (second === 0) {
+                current = "Error";
+            } else {
+                current = String(stored / second);
+            }
+
+            dividing = false;
+            stored = null;
+            update();
+        }
+    }
+
+    function clearEntry() {
+        current = "0";
+        update();
+    }
+
+    function allClear() {
+        current = "0";
+        stored = null;
+        dividing = false;
+        update();
+    }
+</script>
+
+</body>
+</html>
